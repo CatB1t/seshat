@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seshat</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header id="toolbar">
+  <div class="tb-group tb-left">
+    <button id="btnToc" title="Bookmarks / table of contents">&#9776;</button>
+    <button id="btnOpen" title="Open a PDF file">Open PDF</button>
+    <span id="docTitle" title="">No document</span>
+  </div>
+  <div class="tb-group tb-center">
+    <button id="btnZoomOut" title="Zoom out">&minus;</button>
+    <span id="zoomLabel">100%</span>
+    <button id="btnZoomIn" title="Zoom in">+</button>
+    <button id="btnFit" title="Fit page width">Fit width</button>
+    <button id="btnInvert" title="Invert PDF colors — dark page, light text (I)">&#9681; Invert</button>
+    <span id="pageInfo"></span>
+  </div>
+  <div class="tb-group tb-right">
+    <span class="hint" id="hint">Press S (or Alt+click a word) to set the start point</span>
+    <button id="btnRsvp" class="accent" title="Toggle the RSVP overlay (R)">RSVP</button>
+  </div>
+</header>
+
+<div id="content">
+  <aside id="sidebar" class="hidden">
+    <div class="sb-title">Contents</div>
+    <div id="outline"></div>
+  </aside>
+  <main id="viewerContainer">
+    <div id="pages"></div>
+    <div id="notice">
+      <div class="notice-title">Seshat</div>
+      <div id="noticeText">Open a PDF file, or drag &amp; drop one anywhere on this page.<br>
+      Everything runs locally in your browser &mdash; the file never leaves your machine.</div>
+      <div id="recentBox" class="hidden">
+        <div class="recent-title">Recent files</div>
+        <div id="recentList"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="rsvp" class="hidden">
+  <div id="rsvpHeader" title="Drag to move">
+    <span class="rsvp-grip">&#8942;&#8942;</span>
+    <span class="rsvp-title">RSVP</span>
+    <span id="rsvpCounter"></span>
+    <span id="rsvpEta"></span>
+    <button id="rsvpClose" title="Close (Esc)">&#10005;</button>
+  </div>
+  <div id="rsvpStage">
+    <div class="guide guide-top"></div>
+    <div class="guide guide-bottom"></div>
+    <div id="rsvpWord"><span id="wPre"></span><span id="wPivot"></span><span id="wPost"></span></div>
+  </div>
+  <div id="rsvpProgress" title="Click to seek"><div id="rsvpProgressFill"></div></div>
+  <div id="rsvpControls">
+    <button id="btnPick" title="Pick a start word in the PDF (S)">&#8982;</button>
+    <button id="btnPrevSent" title="Previous sentence (Shift+&larr;)">&#9198;</button>
+    <button id="btnPlay" title="Play / pause (Space)">&#9654;</button>
+    <button id="btnNextSent" title="Next sentence (Shift+&rarr;)">&#9197;</button>
+    <div id="wpmBox">
+      <input id="wpmRange" type="range" min="100" max="900" step="25" value="350" title="Words per minute (&uarr;/&darr;)">
+      <span id="wpmLabel">350 wpm</span>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="filePicker" accept="application/pdf,.pdf" hidden>
+<script type="module" src="app.js"></script>
+</body>
+</html>

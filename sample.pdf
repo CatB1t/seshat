@@ -1,0 +1,123 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R /Outlines 8 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 7 0 R >> >> /Contents 4 0 R /Annots [11 0 R 12 0 R] >>
+endobj
+4 0 obj
+<< /Length 904 >>
+stream
+BT
+/F1 14 Tf
+72 720 Td
+20 TL
+(RSVP Reading: A Quick Introduction) Tj T*
+() Tj T*
+(Rapid serial visual presentation, or RSVP, shows text one) Tj T*
+(word at a time in a fixed position. Because your eyes never) Tj T*
+(move, the usual cost of saccades disappears. Many readers) Tj T*
+(can comfortably double their reading speed this way.) Tj T*
+() Tj T*
+(The highlighted letter marks the optimal recognition point.) Tj T*
+(Your brain identifies a word fastest when it fixates just) Tj T*
+(left of the word center. Skilled readers exploit this trick) Tj T*
+(constantly, without ever noticing it.) Tj T*
+() Tj T*
+(Press S, then click any word to set the starting point of) Tj T*
+(the overlay. Then press play, or hit the space bar, and) Tj T*
+(watch the words flow. The title above is an external link,) Tj T*
+(and the line below jumps straight to the second page.) Tj T*
+() Tj T*
+(Jump to page two.) Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 7 0 R >> /XObject << /Im1 13 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 797 >>
+stream
+BT
+/F1 14 Tf
+72 720 Td
+20 TL
+(Page Two: More Practice Text) Tj T*
+() Tj T*
+(Punctuation matters for pacing. Commas add a short pause,) Tj T*
+(while sentence endings add a longer one. Long words also) Tj T*
+(linger a little more on screen. These small adjustments) Tj T*
+(make the stream feel natural rather than mechanical.) Tj T*
+() Tj T*
+(You can drag the overlay anywhere on the page. Your speed) Tj T*
+(and the overlay position are remembered between sessions.) Tj T*
+(Use the arrow keys to step backward or forward, and hold) Tj T*
+(shift to jump between whole sentences. Happy reading!) Tj T*
+ET
+BT
+/F1 28 Tf
+72 470 Td
+(W) Tj
+/F1 14 Tf
+(hen hyphenation strikes, readers see bro-) Tj
+ET
+BT
+/F1 14 Tf
+72 450 Td
+(ken words split across lines everywhere.) Tj
+ET
+q
+120 0 0 80 380 300 cm
+/Im1 Do
+Q
+endstream
+endobj
+7 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+8 0 obj
+<< /Type /Outlines /First 9 0 R /Last 10 0 R /Count 2 >>
+endobj
+9 0 obj
+<< /Title (A Quick Introduction) /Parent 8 0 R /Next 10 0 R /Dest [3 0 R /XYZ 0 792 null] >>
+endobj
+10 0 obj
+<< /Title (More Practice Text) /Parent 8 0 R /Prev 9 0 R /Dest [5 0 R /XYZ 0 792 null] >>
+endobj
+11 0 obj
+<< /Type /Annot /Subtype /Link /Rect [72 712 340 736] /Border [0 0 0] /A << /S /URI /URI (https://en.wikipedia.org/wiki/Rapid_serial_visual_presentation) >> >>
+endobj
+12 0 obj
+<< /Type /Annot /Subtype /Link /Rect [72 374 190 396] /Border [0 0 0] /A << /S /GoTo /D [5 0 R /XYZ 0 792 null] >> >>
+endobj
+13 0 obj
+<< /Type /XObject /Subtype /Image /Width 2 /Height 2 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /ASCIIHexDecode /Length 28 >>
+stream
+FF0000 00FF00 0000FF FFFF00>
+endstream
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n 
+0000000074 00000 n 
+0000000137 00000 n 
+0000000287 00000 n 
+0000001242 00000 n 
+0000001395 00000 n 
+0000002243 00000 n 
+0000002313 00000 n 
+0000002385 00000 n 
+0000002493 00000 n 
+0000002599 00000 n 
+0000002775 00000 n 
+0000002909 00000 n 
+trailer
+<< /Size 14 /Root 1 0 R >>
+startxref
+3105
+%%EOF
