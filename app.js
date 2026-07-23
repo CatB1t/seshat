@@ -492,7 +492,7 @@ function computeFitScale() {
   if (!pageDims.length) return;
   let avail = els.container.clientWidth - 32;
   if (avail < 100) avail = Math.max(100, window.innerWidth - 32);
-  scale = Math.min(2, Math.max(0.25, avail / pageDims[0].w));
+  scale = Math.min(4, Math.max(0.25, avail / pageDims[0].w));
 }
 
 function layoutPages() {
