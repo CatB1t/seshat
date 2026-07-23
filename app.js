@@ -1145,6 +1145,7 @@ window.addEventListener("keydown", (e) => {
   if (e.key === "r" || e.key === "R") { toggleRsvp(); return; }
   if (e.key === "s" || e.key === "S") { setPicking(!picking); return; }
   if (e.key === "i" || e.key === "I") { setInverted(!inverted); return; }
+  if (e.key === "t" || e.key === "T") { setToolbarHidden(!toolbarHidden); return; }
   if (e.key === "Escape" && picking) { setPicking(false); return; }
   if (!overlayOpen) return;
   switch (e.key) {
@@ -1209,7 +1210,16 @@ window.addEventListener("drop", (e) => {
 
 // ---------- Startup ----------
 
+let toolbarHidden = false;
+function setToolbarHidden(on) {
+  toolbarHidden = !!on;
+  document.body.classList.toggle("noToolbar", toolbarHidden);
+  savePref("toolbarHidden", toolbarHidden);
+  if (pdfDoc) renderVisible();
+}
+
 setInverted(loadPref("invert", false));
+setToolbarHidden(loadPref("toolbarHidden", false));
 renderRecent();
 
 const fileParam = new URLSearchParams(location.search).get("file");

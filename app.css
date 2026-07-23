@@ -106,6 +106,8 @@ html, body {
   display: flex;
   height: calc(100% - 46px);
 }
+body.noToolbar #toolbar { display: none; }
+body.noToolbar #content { height: 100%; }
 
 #sidebar {
   flex: none;

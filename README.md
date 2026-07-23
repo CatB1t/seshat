@@ -11,7 +11,7 @@ movable overlay flashes one word at a time at its optimal recognition point.
 
 Pure static files — host anywhere (e.g. GitHub Pages) and open `index.html`.
 Try it with the bundled `sample.pdf` (`?file=sample.pdf`). Space = play/pause,
-arrows = step, `R` = overlay, `☰` = contents.
+arrows = step, `R` = overlay, `T` = toggle toolbar, `☰` = contents.
 
 Built with [PDF.js](https://mozilla.github.io/pdf.js/) (vendored in `lib/`).
 This project is 100% AI generated, with [Claude Code](https://claude.com/claude-code).
