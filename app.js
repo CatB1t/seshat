@@ -1299,6 +1299,9 @@ function setAccent(color) {
   root.setProperty("--accent", color);
   root.setProperty("--pivot", color);
   root.setProperty("--accent-soft", hexToRgba(color, 0.28));
+  // Current-word highlight tints; the inverted (dark) page needs it stronger.
+  root.setProperty("--hl", hexToRgba(color, 0.32));
+  root.setProperty("--hl-strong", hexToRgba(color, 0.45));
   els.accentColor.value = color;
   savePref("accent", color);
 }

@@ -268,10 +268,10 @@ body.picking .textLayer span.w { cursor: crosshair; }
 body.picking .textLayer span.w:hover { background: var(--accent-soft); }
 body.picking .hint { color: var(--accent); }
 .textLayer span.w.current {
-  background: rgba(96, 144, 232, 0.32);
+  background: var(--hl);
 }
 body.inverted .textLayer span.w.current {
-  background: rgba(120, 165, 255, 0.4);
+  background: var(--hl-strong);
 }
 
 .textLayer ::selection { background: rgba(0, 100, 255, 0.25); }
