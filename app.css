@@ -54,7 +54,7 @@ html, body {
 }
 #toolbar button:hover { background: #222; }
 #toolbar button.active {
-  background: rgba(79, 142, 247, 0.18);
+  background: var(--accent-soft);
   border-color: var(--accent);
 }
 #toolbar button.accent {
