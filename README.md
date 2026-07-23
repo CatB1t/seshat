@@ -6,7 +6,7 @@ movable overlay flashes one word at a time at its optimal recognition point.
 - Pick the start point anywhere: press `S` (or `Alt+click`) and click a word
 - Adaptive pacing, ETA, bookmarks sidebar, working PDF links
 - OLED-friendly UI with a dark/light page toggle (`I`, dark by default) that
-  spares images
+  spares images; pick your own accent color for the pivot letter and buttons
 - Remembers recent files and your last reading position
 - Rejoins hyphenated line breaks and drop caps into whole words
 

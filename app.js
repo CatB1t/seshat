@@ -26,7 +26,7 @@ const els = {
   wPre: $("wPre"), wPivot: $("wPivot"), wPost: $("wPost"),
   rsvpCounter: $("rsvpCounter"), rsvpEta: $("rsvpEta"), rsvpStage: $("rsvpStage"),
   progress: $("rsvpProgress"), progressFill: $("rsvpProgressFill"),
-  btnPlay: $("btnPlay"), wpmInput: $("wpmInput"),
+  btnPlay: $("btnPlay"), wpmInput: $("wpmInput"), accentColor: $("accentColor"),
   btnRsvp: $("btnRsvp"),
 };
 
@@ -1286,6 +1286,24 @@ function setToolbarHidden(on) {
   savePref("toolbarHidden", toolbarHidden);
   if (pdfDoc) renderVisible();
 }
+
+// Accent color drives both the UI accent (RSVP button, links, highlights) and
+// the RSVP pivot letter/guides, keeping them the same color.
+function hexToRgba(hex, a) {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+}
+function setAccent(color) {
+  if (!/^#[0-9a-fA-F]{6}$/.test(color)) color = "#4f8ef7";
+  const root = document.documentElement.style;
+  root.setProperty("--accent", color);
+  root.setProperty("--pivot", color);
+  root.setProperty("--accent-soft", hexToRgba(color, 0.28));
+  els.accentColor.value = color;
+  savePref("accent", color);
+}
+els.accentColor.addEventListener("input", () => setAccent(els.accentColor.value));
+setAccent(loadPref("accent", "#4f8ef7"));
 
 setInverted(loadPref("invert", true));
 setToolbarHidden(loadPref("toolbarHidden", false));

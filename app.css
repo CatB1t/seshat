@@ -64,7 +64,7 @@ html, body {
   font-weight: 600;
 }
 #toolbar button.accent:hover { filter: brightness(1.1); }
-#toolbar button.accent.active { background: #2f6ad1; }
+#toolbar button.accent.active { background: var(--accent); filter: brightness(0.8); }
 
 #btnHome {
   background: none !important;
@@ -485,6 +485,20 @@ body.dragover::after {
   cursor: pointer;
 }
 #rsvpControls button:hover { background: #222; }
+#accentColor {
+  flex: none;
+  width: 32px;
+  height: 30px;
+  padding: 2px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+#accentColor::-webkit-color-swatch-wrapper { padding: 0; }
+#accentColor::-webkit-color-swatch { border: none; border-radius: 3px; }
+#accentColor::-moz-color-swatch { border: none; border-radius: 3px; }
+
 #btnPlay { width: 48px; background: var(--accent); border-color: var(--accent); color: #fff; }
 #btnPlay:hover { filter: brightness(1.1); background: var(--accent); }
 
