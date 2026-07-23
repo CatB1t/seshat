@@ -145,17 +145,29 @@ body.noToolbar #content { height: 100%; }
 }
 #outline > ul { padding-left: 6px; }
 #outline a {
-  display: block;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
   color: var(--text);
   text-decoration: none;
   padding: 4px 8px;
   border-radius: 6px;
   font-size: 13px;
+}
+#outline a:hover { background: var(--panel-2); }
+.toc-title {
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#outline a:hover { background: var(--panel-2); }
+.toc-page {
+  flex: none;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
 
 /* ---------- Pages ---------- */
 

@@ -277,7 +277,7 @@ async function openData(data, name, meta = null) {
     fitWidth = true;
     computeFitScale();
     layoutPages();
-    buildOutline();
+    buildOutline(gen);
     els.notice.classList.add("hidden");
 
     if (meta) {
@@ -800,13 +800,22 @@ async function renderLinks(page, v) {
   v.div.append(layer);
 }
 
+// Resolve a destination (named or explicit) to a 0-based page index and the
+// raw destination array. Returns null if it can't be resolved.
+async function resolveDest(dest) {
+  const d = typeof dest === "string" ? await pdfDoc.getDestination(dest) : dest;
+  if (!Array.isArray(d) || d[0] == null) return null;
+  const pageIndex = typeof d[0] === "object"
+    ? await pdfDoc.getPageIndex(d[0])
+    : d[0];
+  return { pageIndex, ref: d };
+}
+
 async function goToDest(dest) {
   try {
-    const d = typeof dest === "string" ? await pdfDoc.getDestination(dest) : dest;
-    if (!Array.isArray(d) || d[0] == null) return;
-    const pageIndex = typeof d[0] === "object"
-      ? await pdfDoc.getPageIndex(d[0])
-      : d[0];
+    const r = await resolveDest(dest);
+    if (!r) return;
+    const { pageIndex, ref: d } = r;
     const v = pageViews[pageIndex];
     if (!v) return;
     let top = v.div.offsetTop - 8;
@@ -822,11 +831,12 @@ async function goToDest(dest) {
 
 // ---------- Bookmarks / outline sidebar ----------
 
-async function buildOutline() {
+async function buildOutline(gen) {
   const box = $("outline");
   box.replaceChildren();
   let outline = null;
   try { outline = await pdfDoc.getOutline(); } catch {}
+  if (gen !== docGen) return;
   if (!outline || !outline.length) {
     const empty = document.createElement("div");
     empty.className = "sb-empty";
@@ -834,15 +844,41 @@ async function buildOutline() {
     box.append(empty);
     return;
   }
-  box.append(buildOutlineList(outline));
+  // Printed page labels (roman numerals for front matter, etc.) if the PDF
+  // defines them; otherwise fall back to the physical page number.
+  let labels = null;
+  try { labels = await pdfDoc.getPageLabels(); } catch {}
+  if (gen !== docGen) return;
+  const pending = [];
+  box.append(buildOutlineList(outline, pending));
+  // Resolve each entry's page number in the background so the sidebar stays
+  // responsive on large tables of contents.
+  for (const { dest, span } of pending) {
+    if (gen !== docGen) return;
+    try {
+      const r = await resolveDest(dest);
+      if (r && r.pageIndex != null) {
+        span.textContent = labels ? labels[r.pageIndex] : String(r.pageIndex + 1);
+      }
+    } catch {}
+  }
 }
 
-function buildOutlineList(items) {
+function buildOutlineList(items, pending) {
   const ul = document.createElement("ul");
   for (const it of items) {
     const li = document.createElement("li");
     const a = document.createElement("a");
-    a.textContent = it.title || "(untitled)";
+    const title = document.createElement("span");
+    title.className = "toc-title";
+    title.textContent = it.title || "(untitled)";
+    a.append(title);
+    if (it.dest) {
+      const page = document.createElement("span");
+      page.className = "toc-page";
+      a.append(page);
+      pending.push({ dest: it.dest, span: page });
+    }
     a.href = "#";
     a.addEventListener("click", (e) => {
       e.preventDefault();
@@ -850,7 +886,7 @@ function buildOutlineList(items) {
       else if (it.dest) goToDest(it.dest);
     });
     li.append(a);
-    if (it.items && it.items.length) li.append(buildOutlineList(it.items));
+    if (it.items && it.items.length) li.append(buildOutlineList(it.items, pending));
     ul.append(li);
   }
   return ul;
