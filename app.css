@@ -66,6 +66,15 @@ html, body {
 #toolbar button.accent:hover { filter: brightness(1.1); }
 #toolbar button.accent.active { background: #2f6ad1; }
 
+#btnHome {
+  background: none !important;
+  border: none;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--text);
+}
+#btnHome:hover { color: var(--accent); }
+
 #btnZoomOut, #btnZoomIn { width: 30px; padding: 5px 0; }
 #zoomLabel { min-width: 44px; text-align: center; color: var(--text-dim); }
 #pageInfo { color: var(--text-dim); white-space: nowrap; }

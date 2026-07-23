@@ -205,10 +205,40 @@ function savePref(key, val) {
 
 // ---------- Document loading ----------
 
+const DEFAULT_NOTICE = els.noticeText.innerHTML;
+
 function setNotice(html) {
   els.notice.classList.remove("hidden");
   els.noticeText.innerHTML = html;
 }
+
+// Close the current document and return to the home screen.
+function goHome() {
+  if (!pdfDoc) return;
+  savePositionNow();
+  docGen++; // cancels any in-flight extraction or rendering for the old doc
+  closeRsvp();
+  setPicking(false);
+  if (observer) observer.disconnect();
+  pdfDoc = null;
+  pageObjs = [];
+  pageViews = [];
+  currentDocRec = null;
+  resetTextState();
+  els.pages.replaceChildren();
+  $("outline").replaceChildren();
+  $("sidebar").classList.add("hidden");
+  els.pageInfo.classList.add("hidden");
+  els.docTitle.textContent = "No document";
+  els.docTitle.title = "";
+  document.title = "Seshat";
+  els.noticeText.innerHTML = DEFAULT_NOTICE;
+  els.notice.classList.remove("hidden");
+  renderRecent();
+  history.replaceState(null, "", location.pathname);
+}
+
+$("btnHome").addEventListener("click", goHome);
 
 async function openData(data, name, meta = null) {
   const gen = ++docGen;
