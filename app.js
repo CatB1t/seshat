@@ -25,7 +25,7 @@ const els = {
   wPre: $("wPre"), wPivot: $("wPivot"), wPost: $("wPost"),
   rsvpCounter: $("rsvpCounter"), rsvpEta: $("rsvpEta"), rsvpStage: $("rsvpStage"),
   progress: $("rsvpProgress"), progressFill: $("rsvpProgressFill"),
-  btnPlay: $("btnPlay"), wpmRange: $("wpmRange"), wpmLabel: $("wpmLabel"),
+  btnPlay: $("btnPlay"), wpmInput: $("wpmInput"),
   btnRsvp: $("btnRsvp"),
 };
 
@@ -445,9 +445,19 @@ async function extractAllText(gen) {
   }
 }
 
+// The page occupying the center of the viewport.
+function currentPageIndex() {
+  const center = els.container.scrollTop + els.container.clientHeight / 2;
+  for (let i = 0; i < pageViews.length; i++) {
+    const d = pageViews[i].div;
+    if (center < d.offsetTop + d.offsetHeight + 8) return i;
+  }
+  return Math.max(0, pageViews.length - 1);
+}
+
 function updatePageInfo() {
   if (!pdfDoc) return;
-  let t = pdfDoc.numPages + (pdfDoc.numPages === 1 ? " page" : " pages");
+  let t = "Page " + (currentPageIndex() + 1) + " / " + pdfDoc.numPages;
   if (!extractionDone && pageObjs.length) {
     t += " · reading text " + Math.round((extractedPages / pageObjs.length) * 100) + "%";
   }
@@ -498,6 +508,7 @@ function renderVisible() {
     const y = v.div.offsetTop;
     if (y + v.div.offsetHeight >= top && y <= bottom) renderPage(v);
   }
+  updatePageInfo();
 }
 
 let scrollPending = false;
@@ -1041,13 +1052,18 @@ els.progress.addEventListener("click", (e) => {
 });
 
 function setWpm(v) {
-  wpm = Math.min(900, Math.max(100, v));
-  els.wpmRange.value = wpm;
-  els.wpmLabel.textContent = wpm + " wpm";
+  if (!Number.isFinite(v)) v = wpm;
+  wpm = Math.round(Math.min(1500, Math.max(60, v)));
+  els.wpmInput.value = wpm;
   savePref("wpm", wpm);
   updateEta(current);
 }
-els.wpmRange.addEventListener("input", () => setWpm(Number(els.wpmRange.value)));
+$("wpmMinus").addEventListener("click", () => setWpm(wpm - 25));
+$("wpmPlus").addEventListener("click", () => setWpm(wpm + 25));
+els.wpmInput.addEventListener("change", () => setWpm(parseInt(els.wpmInput.value, 10)));
+els.wpmInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") els.wpmInput.blur();
+});
 setWpm(loadPref("wpm", 350));
 
 // Dragging the overlay.
@@ -1104,10 +1120,7 @@ els.rsvpHeader.addEventListener("pointerup", (e) => {
 
 window.addEventListener("keydown", (e) => {
   const t = e.target;
-  if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) {
-    if (t === els.wpmRange && (e.key === " " || e.key === "Enter")) t.blur();
-    else return;
-  }
+  if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   const overlayOpen = !els.rsvp.classList.contains("hidden");
   if (e.key === "r" || e.key === "R") { toggleRsvp(); return; }

@@ -66,8 +66,10 @@
     <button id="btnPlay" title="Play / pause (Space)">&#9654;</button>
     <button id="btnNextSent" title="Next sentence (Shift+&rarr;)">&#9197;</button>
     <div id="wpmBox">
-      <input id="wpmRange" type="range" min="100" max="900" step="25" value="350" title="Words per minute (&uarr;/&darr;)">
-      <span id="wpmLabel">350 wpm</span>
+      <button id="wpmMinus" title="Slower (&darr;)">&minus;</button>
+      <input id="wpmInput" type="number" min="60" max="1500" step="25" value="350" title="Words per minute &mdash; type any value">
+      <span class="wpm-unit">wpm</span>
+      <button id="wpmPlus" title="Faster (&uarr;)">+</button>
     </div>
   </div>
 </div>

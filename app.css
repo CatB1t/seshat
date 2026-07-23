@@ -436,15 +436,29 @@ body.dragover::after {
 #wpmBox {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
   min-width: 0;
+  justify-content: flex-end;
 }
-#wpmRange { flex: 1; min-width: 0; accent-color: var(--accent); }
-#wpmLabel {
-  font-size: 12px;
-  color: var(--text-dim);
-  min-width: 58px;
-  text-align: right;
+#wpmBox button { width: 30px; }
+#wpmInput {
+  width: 60px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  padding: 4px 6px;
+  text-align: center;
   font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
+#wpmInput::-webkit-outer-spin-button,
+#wpmInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#wpmInput:focus { outline: 1px solid var(--accent); }
+.wpm-unit { color: var(--text-dim); font-size: 12px; }
