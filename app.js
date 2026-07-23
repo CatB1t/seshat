@@ -682,14 +682,17 @@ const imageRectsCache = new Map(); // pageNum -> rects in PDF units
 function setInverted(on) {
   inverted = !!on;
   document.body.classList.toggle("inverted", inverted);
-  $("btnInvert").classList.toggle("active", inverted);
+  // Label names the mode you'll switch to (the button's action).
+  const btn = $("btnTheme");
+  btn.textContent = inverted ? "☀ Light" : "☾ Dark";
+  btn.title = (inverted ? "Switch page to light mode" : "Switch page to dark mode") + " (I)";
   savePref("invert", inverted);
   if (inverted) {
     for (const v of pageViews) if (v.rendered) buildImageOverlay(v);
   }
 }
 
-$("btnInvert").addEventListener("click", () => setInverted(!inverted));
+$("btnTheme").addEventListener("click", () => setInverted(!inverted));
 
 async function getImageRects(page) {
   if (imageRectsCache.has(page.pageNumber)) return imageRectsCache.get(page.pageNumber);
@@ -1284,7 +1287,7 @@ function setToolbarHidden(on) {
   if (pdfDoc) renderVisible();
 }
 
-setInverted(loadPref("invert", false));
+setInverted(loadPref("invert", true));
 setToolbarHidden(loadPref("toolbarHidden", false));
 renderRecent();
 
