@@ -20,6 +20,7 @@ const $ = (id) => document.getElementById(id);
 const els = {
   pages: $("pages"), container: $("viewerContainer"), notice: $("notice"),
   noticeText: $("noticeText"), docTitle: $("docTitle"), pageInfo: $("pageInfo"),
+  pageInput: $("pageInput"), pageCount: $("pageCount"), indexingNote: $("indexingNote"),
   zoomLabel: $("zoomLabel"), filePicker: $("filePicker"),
   rsvp: $("rsvp"), rsvpHeader: $("rsvpHeader"), rsvpWord: $("rsvpWord"),
   wPre: $("wPre"), wPivot: $("wPivot"), wPost: $("wPost"),
@@ -457,12 +458,33 @@ function currentPageIndex() {
 
 function updatePageInfo() {
   if (!pdfDoc) return;
-  let t = "Page " + (currentPageIndex() + 1) + " / " + pdfDoc.numPages;
-  if (!extractionDone && pageObjs.length) {
-    t += " · reading text " + Math.round((extractedPages / pageObjs.length) * 100) + "%";
+  els.pageInfo.classList.remove("hidden");
+  if (document.activeElement !== els.pageInput) {
+    els.pageInput.value = currentPageIndex() + 1;
   }
-  els.pageInfo.textContent = t;
+  els.pageInput.max = pdfDoc.numPages;
+  els.pageCount.textContent = pdfDoc.numPages;
+  els.indexingNote.textContent = !extractionDone && pageObjs.length
+    ? " · reading text " + Math.round((extractedPages / pageObjs.length) * 100) + "%"
+    : "";
 }
+
+function goToPage(n) {
+  if (!pdfDoc || !pageViews.length) return;
+  const i = Math.min(pdfDoc.numPages, Math.max(1, n)) - 1;
+  els.container.scrollTop = Math.max(0, pageViews[i].div.offsetTop - 8);
+  renderVisible();
+}
+
+els.pageInput.addEventListener("change", () => {
+  const n = parseInt(els.pageInput.value, 10);
+  if (Number.isFinite(n)) goToPage(n);
+  else updatePageInfo();
+});
+els.pageInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") els.pageInput.blur();
+});
+els.pageInput.addEventListener("blur", updatePageInfo);
 
 // ---------- Page layout & rendering ----------
 
@@ -761,10 +783,7 @@ async function goToDest(dest) {
     if (d[1] && d[1].name === "XYZ" && typeof d[3] === "number") {
       top = v.div.offsetTop + (pageDims[pageIndex].h - d[3]) * scale - 8;
     }
-    els.container.scrollTo({
-      top: Math.max(0, top),
-      behavior: document.hidden ? "auto" : "smooth",
-    });
+    els.container.scrollTop = Math.max(0, top);
     renderVisible();
   } catch (err) {
     console.warn("Could not resolve destination", dest, err);

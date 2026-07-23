@@ -69,6 +69,26 @@ html, body {
 #btnZoomOut, #btnZoomIn { width: 30px; padding: 5px 0; }
 #zoomLabel { min-width: 44px; text-align: center; color: var(--text-dim); }
 #pageInfo { color: var(--text-dim); white-space: nowrap; }
+#pageInfo.hidden { display: none; }
+#pageInput {
+  width: 52px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  padding: 3px 4px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+#pageInput::-webkit-outer-spin-button,
+#pageInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#pageInput:focus { outline: 1px solid var(--accent); }
 
 #docTitle {
   overflow: hidden;
