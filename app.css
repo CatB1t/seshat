@@ -334,6 +334,18 @@ body.picking .linkLayer a { pointer-events: none; }
 .recent-del { color: var(--text-dim); padding: 2px 6px; border-radius: 4px; }
 .recent-del:hover { background: #2a2a2a; color: var(--text); }
 
+.gh-link {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+}
+.gh-link:hover { color: var(--text); }
+
 body.dragover::after {
   content: "Drop PDF to open";
   position: fixed;
